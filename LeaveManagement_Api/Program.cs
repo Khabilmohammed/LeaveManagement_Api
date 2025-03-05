@@ -1,6 +1,9 @@
 using LeaveManagement.DataAccess.Data;
 using LeaveManagement.DataAccess.Data.Repository.AuthRepo;
+using LeaveManagement.DataAccess.Data.Repository.LeaveRequestRepo;
 using LeaveManagement.DataAccess.Services.AuthServices;
+using LeaveManagement.DataAccess.Services.LeaveRequestServices;
+using LeaveManagement.Models.Mapper;
 using LeaveManagement.Models.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,9 +54,12 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
-builder.Services.AddControllers();
 
 
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -92,6 +99,9 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
+builder.Services.AddScoped<ILeaveRequestService, LeaveRequestService>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
 var app = builder.Build();

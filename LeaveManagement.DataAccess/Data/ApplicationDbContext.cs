@@ -17,5 +17,6 @@ namespace LeaveManagement.DataAccess.Data
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
     }
 }
