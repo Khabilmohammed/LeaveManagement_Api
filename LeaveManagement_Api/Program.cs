@@ -1,4 +1,6 @@
 using LeaveManagement.DataAccess.Data;
+using LeaveManagement.DataAccess.Data.Repository.AuthRepo;
+using LeaveManagement.DataAccess.Services.AuthServices;
 using LeaveManagement.Models.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -88,7 +90,8 @@ builder.Services.AddSwaggerGen(options =>
 
 
 
-
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 
 var app = builder.Build();

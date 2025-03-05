@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Repository\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.13" />
@@ -29,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LeaveManagement.Models\LeaveManagement.Models.csproj" />
+    <ProjectReference Include="..\LeaveManagement.Utility\LeaveManagement.Utility.csproj" />
   </ItemGroup>
 
 </Project>
